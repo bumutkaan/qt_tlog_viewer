@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainWidget</class>
+ <widget class="QWidget" name="mainWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>720</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>2342432</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>2</number>
+     </property>
+     <property name="topMargin">
+      <number>5</number>
+     </property>
+     <property name="rightMargin">
+      <number>2</number>
+     </property>
+     <property name="bottomMargin">
+      <number>5</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="open_map_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+padding:10px;
+border:1px solid rgb(225,225,225);
+border-radius:5px;
+background-color:rgb(225,225,225);
+color:black;
+}
+QPushButton::hover
+{
+padding:10px;
+border:1px solid rgb(100,100,100);
+border-radius:10px;
+background-color:rgb(50,50,50);
+color:white;
+}</string>
+       </property>
+       <property name="text">
+        <string>Harita</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="open_data_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+padding:10px;
+border:1px solid rgb(150,150,150);
+border-radius:5px;
+background-color:rgb(100,100,100);
+color:white;
+}
+QPushButton::hover
+{
+padding:10px;
+border:1px solid rgb(100,100,100);
+border-radius:10px;
+background-color:rgb(50,50,50);
+color:white;
+}</string>
+       </property>
+       <property name="text">
+        <string>Ham Veri</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QWidget" name="page"/>
+     <widget class="QWidget" name="page_2"/>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="spacing">
+      <number>5</number>
+     </property>
+     <property name="leftMargin">
+      <number>2</number>
+     </property>
+     <property name="topMargin">
+      <number>5</number>
+     </property>
+     <property name="rightMargin">
+      <number>2</number>
+     </property>
+     <property name="bottomMargin">
+      <number>5</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="start_stop_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+padding:10px;
+border:1px solid rgb(150,150,150);
+border-radius:5px;
+background-color:rgb(100,100,100);
+color:white;
+}
+QPushButton::hover
+{
+padding:10px;
+border:1px solid rgb(100,100,100);
+border-radius:10px;
+background-color:rgb(50,50,50);
+color:white;
+}</string>
+       </property>
+       <property name="text">
+        <string>Başlat</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="slider_data_label">
+       <property name="text">
+        <string>00:00</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="horizontalSlider">
+       <property name="styleSheet">
+        <string notr="true">QSlider {
+    min-height: 30px;
+}
+
+QSlider::groove:horizontal {
+    height: 6px;
+    background: #3a3a3a;
+    border-radius: 3px;
+}
+
+QSlider::handle:horizontal {
+    width: 16px;
+    height: 16px;
+    margin: -5px 0;
+    background: #ffffff;
+    border: 1px solid #888888;
+    border-radius: 8px;
+}
+
+QSlider::handle:horizontal:hover {
+    background: #dddddd;
+}
+
+QSlider::add-page:horizontal {
+    background: #3a3a3a;
+}
+
+QSlider::sub-page:horizontal {
+    background: #00aaff;
+}</string>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="slider_max_data_label">
+       <property name="text">
+        <string>10:00</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
