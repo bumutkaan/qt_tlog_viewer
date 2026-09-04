@@ -24,10 +24,17 @@ add_subdirectory(include)
 file(COPY qml DESTINATION .)
 file(COPY ui/ui/imgs/icon.ico DESTINATION .)
 
+if(WIN32)
 add_executable(tlog_viewer WIN32
     controller.cpp
     main.cpp
 )
+else()
+  add_executable(tlog_viewer
+      controller.cpp
+      main.cpp
+  )
+endif()
 
 target_link_libraries(tlog_viewer uiWindow)
 

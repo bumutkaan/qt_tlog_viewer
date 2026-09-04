@@ -90,11 +90,15 @@ void mainPage::resize_event()
 
 void mainPage::slider_position_changed(int value)
 {
-    TelemetryData data = tlogParser::m_data[value];
-    map_page_ptr->set_index(value);
-    log_viewer_page_ptr->set_index(value);
-    QString time = QString::fromStdString( std::to_string(data.second) + ":" + std::to_string(data.m_second).substr(0,2) );
-    ui->slider_data_label->setText(time);
+    if( tlogParser::m_data.size()>value)
+    {
+        TelemetryData data = tlogParser::m_data[value];
+        map_page_ptr->set_index(value);
+        log_viewer_page_ptr->set_index(value);
+        QString time = QString::fromStdString( std::to_string(data.second) + ":" + std::to_string(data.m_second).substr(0,2) );
+        ui->slider_data_label->setText(time);
+    }
+
 }
 
 void mainPage::live_playback_func()

@@ -24,18 +24,20 @@ void fileSelectPage::setup_ui(){
 
 void fileSelectPage::selectFile()
 {
-    fileUrl = QFileDialog::getOpenFileName(this,tr("TLOG dosyasi aç"), ".");
+    fileUrl = QFileDialog::getOpenFileName(this,"TLOG dosyasi aç", ".","TLOG Files (*.tlog)");
 
     if (!tlog_parser_ptr->open(fileUrl.toStdString()))
     {
         std::cout << "TLog acilamadi\n" << std::endl;
     }
-    tlogParser::m_data.clear();
-    ui->loading_label->setText("yükleniyor: 0%");
-    ui->loading_label->show();
-    ui->file_select_button->hide();
-    tlog_parser_ptr->parse();
-
+    else
+    {
+        tlogParser::m_data.clear();
+        ui->loading_label->setText("yükleniyor: 0%");
+        ui->loading_label->show();
+        ui->file_select_button->hide();
+        tlog_parser_ptr->parse();
+    }
 }
 
 void fileSelectPage::readedRatio(unsigned short readed_ratio)
