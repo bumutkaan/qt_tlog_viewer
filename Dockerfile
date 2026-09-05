@@ -2,7 +2,6 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Build dependencies + Qt 5
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
@@ -29,13 +28,11 @@ WORKDIR /app
 
 COPY . .
 
-# Build
 RUN cmake -S . -B build \
     -DCMAKE_BUILD_TYPE=Release
 
 RUN cmake --build build -j$(nproc)
 
-# Runtime
 ENV QT_X11_NO_MITSHM=1
 
 CMD ["./build/tlog_viewer"]
