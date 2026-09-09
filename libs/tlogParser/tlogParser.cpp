@@ -111,6 +111,7 @@ void tlogParser::append_data(const tlogParser::Packet& packet)
 
         TelemetryData data;
 
+        data.timestamp = packet.timestamp;
         data.m_second =  gps.time_boot_ms % 1000;
         data.second =  gps.time_boot_ms / 1000;
 

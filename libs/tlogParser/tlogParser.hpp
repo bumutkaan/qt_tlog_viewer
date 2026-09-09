@@ -22,6 +22,7 @@ extern "C" {
 // https://docs.qgroundcontrol.com/master/en/qgc-dev-guide/file_formats/mavlink.html
 struct TelemetryData
 {
+    std::uint64_t timestamp=0;
 
     unsigned int m_second = 0;
     unsigned int second = 0;

@@ -7,7 +7,7 @@ mainPage::mainPage(QWidget * parent) :
     ui(new Ui::mainWidget),
     live_playback_timer(new QTimer(this))
 {
-
+    live_playback_timer->setInterval(PLAYBACK_TIMEOUT_MS);
 }
 mainPage::~mainPage(){
     delete ui;
@@ -66,7 +66,10 @@ void mainPage::set_slider_max_data(int data_size)
     {
         TelemetryData data = tlogParser::m_data[tlogParser::m_data.size() - 1];
         ui->horizontalSlider->setMaximum(data_size);
-        QString time = QString::fromStdString( std::to_string(data.second) + ":" + std::to_string(data.m_second).substr(0,2) );
+        unsigned short munite = data.second /60;
+        unsigned short second = data.second % 60;
+        // QString time = QString::fromStdString(std::to_string(hours) ":" + std::to_string(data.second) + ":" + std::to_string(data.m_second).substr(0,2) );
+        QString time = QString::number(munite) + QString(":") + QString::number(second) +  QString(":") + QString::number(data.m_second);
         ui->slider_max_data_label->setText(time);
     }
 
@@ -95,7 +98,12 @@ void mainPage::slider_position_changed(int value)
         TelemetryData data = tlogParser::m_data[value];
         map_page_ptr->set_index(value);
         log_viewer_page_ptr->set_index(value);
-        QString time = QString::fromStdString( std::to_string(data.second) + ":" + std::to_string(data.m_second).substr(0,2) );
+        // QString time = QString::fromStdString( std::to_string(data.second) + ":" + std::to_string(data.m_second).substr(0,2) );
+
+        unsigned short munite = data.second /60;
+        unsigned short second = data.second % 60;
+        // QString time = QString::fromStdString(std::to_string(hours) ":" + std::to_string(data.second) + ":" + std::to_string(data.m_second).substr(0,2) );
+        QString time = QString::number(munite) + QString(":") + QString::number(second) + QString(":") + QString::number(data.m_second);
         ui->slider_data_label->setText(time);
     }
 
@@ -103,8 +111,36 @@ void mainPage::slider_position_changed(int value)
 
 void mainPage::live_playback_func()
 {
-    int new_poz = ui->horizontalSlider->sliderPosition() +1;
-    if(new_poz < tlogParser::m_data.size()) set_index(new_poz);
+    // t
+    // t+1
+    // t+ 5
+    unsigned int next_index = ui->horizontalSlider->sliderPosition()+1;
+    TelemetryData now_data = tlogParser::m_data[ui->horizontalSlider->sliderPosition()];
+    if(next_index < tlogParser::m_data.size() )
+    {
+        TelemetryData next_data = tlogParser::m_data[next_index];
+
+        unsigned int now_second = now_data.second;
+        unsigned int now_m_second = now_data.m_second;
+
+        unsigned int next_second = next_data.second;
+        unsigned int next_m_second = next_data.m_second;
+        int dif_second = static_cast<int>(next_second - now_second);
+        int dif_m_second = static_cast<int>(next_m_second - now_m_second);
+        dif_m_second = dif_m_second + (1000 * dif_second);
+        dif_m_second = dif_m_second - counter_playback *PLAYBACK_TIMEOUT_MS;
+
+        if(dif_m_second <= 15)
+        {
+            set_index(next_index);
+            counter_playback = 0;
+        }
+        else
+        {
+            counter_playback+= 1;
+        }
+    }
+
 }
 
 void mainPage::start_livepaylack()

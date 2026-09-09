@@ -14,6 +14,8 @@
 #include "mapPage.hpp"
 #include <tlogParser.hpp>
 
+#define PLAYBACK_TIMEOUT_MS 5
+
 namespace Ui {
     class mainWidget;
 };
@@ -33,6 +35,9 @@ private:
     tlogParser * tlog_parser_ptr;
     QTimer * live_playback_timer;
 
+    int counter_playback=0;
+    int jump_counter = 0;
+
 signals:
 
 public slots:
@@ -46,6 +51,7 @@ public slots:
     void slider_position_changed(int value);
     void live_playback_func();
     void start_livepaylack();
+
 
 };
 #endif
